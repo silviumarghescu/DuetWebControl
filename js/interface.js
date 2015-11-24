@@ -874,9 +874,7 @@ function checkBoundaries(value, defaultValue, minValue, maxValue) {
 }
 
 function loadSettings() {
-    $.cookie.JSON = true;
-    
-	var loadedSettings = $.cookie("settings");
+	var loadedSettings = localStorage.getItem("settings");
 	if (loadedSettings != undefined && loadedSettings.length > 0) {
 		loadedSettings = JSON.parse(loadedSettings);
 		
@@ -1011,7 +1009,7 @@ function saveSettings() {
 	settings.defaultBedTemps = settings.defaultBedTemps.sort(function(a, b) { return a - b; });
 	
 	// Save Settings
-	$.cookie("settings", JSON.stringify(settings), { expires: 999999 });
+	localStorage.setItem("settings", JSON.stringify(settings), { expires: 999999 });
 }
 
 function applySettings() {
@@ -1119,7 +1117,7 @@ $(document).ready(function() {
 			translationData = response;
 			
 			// We need to load the language here, because we don't want to translate dynamic entries
-			var loadedSettings = $.cookie("settings");
+			var loadedSettings = localStorage.getItem("settings");
 			if (loadedSettings != undefined && loadedSettings.length > 0) {
 				loadedSettings = JSON.parse(loadedSettings);
 				if (loadedSettings.hasOwnProperty("language")) {
@@ -1947,7 +1945,7 @@ $("input[name='temp_selection']:radio").change(function() {
 $("#input_bowden_length").blur(function() {
 	// NOTE: This is a temporary solution
 	settings.bowdenLength = checkBoundaries($(this).val(), 300, 0);
-	$.cookie("settings", JSON.stringify(settings), { expires: 999999 });
+	localStorage.setItem("settings", JSON.stringify(settings), { expires: 999999 });
 });
 
 $("#input_file_upload").change(function(e) {
