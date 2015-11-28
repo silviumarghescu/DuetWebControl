@@ -1009,7 +1009,7 @@ function saveSettings() {
 	settings.defaultBedTemps = settings.defaultBedTemps.sort(function(a, b) { return a - b; });
 	
 	// Save Settings
-	localStorage.setItem("settings", JSON.stringify(settings), { expires: 999999 });
+	localStorage.setItem("settings", JSON.stringify(settings));
 }
 
 function applySettings() {
@@ -1945,7 +1945,7 @@ $("input[name='temp_selection']:radio").change(function() {
 $("#input_bowden_length").blur(function() {
 	// NOTE: This is a temporary solution
 	settings.bowdenLength = checkBoundaries($(this).val(), 300, 0);
-	localStorage.setItem("settings", JSON.stringify(settings), { expires: 999999 });
+	localStorage.setItem("settings", JSON.stringify(settings));
 });
 
 $("#input_file_upload").change(function(e) {
